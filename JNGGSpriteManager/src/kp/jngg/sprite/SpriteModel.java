@@ -5,12 +5,14 @@
  */
 package kp.jngg.sprite;
 
+import kp.jngg.sprite.SpriteLoader.RawBitmap;
+
 /**
  *
  * @author Asus
  */
-@FunctionalInterface
 public interface SpriteModel
 {
     Sprite buildSprite();
+    RawBitmap getRaw();
 }

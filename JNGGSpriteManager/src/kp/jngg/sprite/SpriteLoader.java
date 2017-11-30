@@ -9,6 +9,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.function.BiConsumer;
 import javax.imageio.ImageIO;
 
 /**
@@ -21,7 +23,7 @@ public class SpriteLoader
     
     private final SpriteLoader parent;
     private final String root;
-    private final HashMap<String, BufferedImage> bins = new HashMap<>();
+    private final HashMap<String, RawBitmap> bins = new HashMap<>();
     private final HashMap<String, SpriteModel> hash = new HashMap<>();
     
     public SpriteLoader(SpriteLoader parent, File root)
@@ -45,23 +47,23 @@ public class SpriteLoader
         return new File(base + "/" + path);
     }
     
-    private BufferedImage bin(String path)
+    private RawBitmap bin(String path)
     {
-        BufferedImage bi;
-        return (bi = bins.get(path)) != null ? bi
+        RawBitmap raw;
+        return (raw = bins.get(path)) != null ? raw
                 : parent != null ? parent.bin(path) : null;
     }
     
-    private BufferedImage loadBin(String path) throws IOException
+    private RawBitmap loadBin(String path) throws IOException
     {
-        BufferedImage bi = bin(path);
-        if(bi == null)
-            return bi;
-        File file = file(path);
-        bi = ImageIO.read(file);
-        bins.put(path, bi);
-        return bi;
+        RawBitmap raw = bin(path);
+        if(raw == null)
+            return raw;
+        raw = new RawBitmap(path);
+        bins.put(path, raw);
+        return raw;
     }
+    public final RawBitmap loadRaw(String path) throws IOException { return loadBin(path); }
     
     private <S extends SpriteModel> S sprite(String id)
     {
@@ -81,7 +83,7 @@ public class SpriteLoader
         StaticSprite s = sprite(id);
         if(s != null)
             return s;
-        BufferedImage bin = loadBin(path);
+        RawBitmap bin = loadBin(path);
         return sprite(id, new StaticSprite(bin));
     }
     
@@ -90,7 +92,7 @@ public class SpriteLoader
         SheetSprite s = sprite(id);
         if(s != null)
             return s;
-        BufferedImage bin = loadBin(path);
+        RawBitmap bin = loadBin(path);
         return sprite(id, new SheetSprite(bin, x0, y0, x1, y1));
     }
     
@@ -99,7 +101,39 @@ public class SpriteLoader
         AnimatedSpriteModel s = sprite(id);
         if(s != null)
             return s;
-        BufferedImage bin = loadBin(path);
+        RawBitmap bin = loadBin(path);
         return sprite(id, new AnimatedSpriteModel(bin, x, y, width, height, frames));
+    }
+    
+    public final <S extends Sprite> S getSprite(String id)
+    {
+        S s = sprite(id);
+        if(s == null)
+            throw new IllegalArgumentException("Sprite " + id + " not found");
+        return s;
+    }
+    
+    
+    public final void forEachModel(BiConsumer<String, SpriteModel> consumer)
+    {
+        for(Map.Entry<String, SpriteModel> e : hash.entrySet())
+            consumer.accept(e.getKey(), e.getValue());
+    }
+    
+    
+    
+    public final class RawBitmap
+    {
+        final String path;
+        final BufferedImage raw;
+
+        private RawBitmap(String path) throws IOException
+        {
+            this.path = path;
+            this.raw = ImageIO.read(file(path));
+        }
+
+        public final String getPath() { return path; }
+        public final BufferedImage getBufferedImage() { return raw; }
     }
 }

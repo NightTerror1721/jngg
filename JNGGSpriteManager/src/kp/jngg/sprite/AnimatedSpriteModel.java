@@ -5,7 +5,7 @@
  */
 package kp.jngg.sprite;
 
-import java.awt.image.BufferedImage;
+import kp.jngg.sprite.SpriteLoader.RawBitmap;
 
 /**
  *
@@ -13,14 +13,14 @@ import java.awt.image.BufferedImage;
  */
 public class AnimatedSpriteModel implements SpriteModel
 {
-    private final BufferedImage base;
+    private final RawBitmap base;
     private final int x;
     private final int y;
     private final int width;
     private final int height;
     private final int frames;
     
-    AnimatedSpriteModel(BufferedImage base, int x, int y, int width, int height, int frames)
+    AnimatedSpriteModel(RawBitmap base, int x, int y, int width, int height, int frames)
     {
         this.base = base;
         this.x = x;
@@ -30,7 +30,16 @@ public class AnimatedSpriteModel implements SpriteModel
         this.frames = frames;
     }
     
+    public final int getX() { return x; }
+    public final int getY() { return y; }
+    public final int getWidth() { return width; }
+    public final int getHeight() { return height; }
+    public final int getFrames() { return frames; }
+    
     @Override
-    public Sprite buildSprite() { return new AnimatedSprite(this, base, x, y, width, height, frames); }
+    public Sprite buildSprite() { return new AnimatedSprite(this, base.raw, x, y, width, height, frames); }
+
+    @Override
+    public RawBitmap getRaw() { return base; }
     
 }

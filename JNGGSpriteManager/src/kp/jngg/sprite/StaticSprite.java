@@ -7,7 +7,7 @@ package kp.jngg.sprite;
 
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
-import java.awt.image.BufferedImage;
+import kp.jngg.sprite.SpriteLoader.RawBitmap;
 
 /**
  *
@@ -15,18 +15,18 @@ import java.awt.image.BufferedImage;
  */
 public class StaticSprite extends Sprite implements SpriteModel
 {
-    final BufferedImage image;
+    final RawBitmap image;
     
-    StaticSprite(BufferedImage image) { this.image = image; }
+    StaticSprite(RawBitmap image) { this.image = image; }
     
     @Override
     public final SpriteModel getModel() { return this; }
     
     @Override
-    public int width() { return image.getWidth(); }
+    public int width() { return image.raw.getWidth(); }
 
     @Override
-    public int height() { return image.getHeight(); }
+    public int height() { return image.raw.getHeight(); }
 
     @Override
     public final void update(double delta) {}
@@ -34,10 +34,13 @@ public class StaticSprite extends Sprite implements SpriteModel
     @Override
     public void draw(Graphics2D g, AffineTransform transform)
     {
-        g.drawImage(image, transform, null);
+        g.drawImage(image.raw, transform, null);
     }
 
     @Override
     public StaticSprite buildSprite() { return this; }
+
+    @Override
+    public final RawBitmap getRaw() { return image; }
     
 }

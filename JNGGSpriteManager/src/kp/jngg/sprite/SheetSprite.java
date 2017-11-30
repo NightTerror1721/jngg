@@ -7,13 +7,13 @@ package kp.jngg.sprite;
 
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
-import java.awt.image.BufferedImage;
+import kp.jngg.sprite.SpriteLoader.RawBitmap;
 
 /**
  *
  * @author Asus
  */
-public class SheetSprite extends StaticSprite implements SpriteModel
+public class SheetSprite extends StaticSprite
 {
     private final int x0;
     private final int y0;
@@ -24,7 +24,7 @@ public class SheetSprite extends StaticSprite implements SpriteModel
     private final int width;
     private final int height;
     
-    SheetSprite(BufferedImage image, int x0, int y0, int x1, int y1)
+    SheetSprite(RawBitmap image, int x0, int y0, int x1, int y1)
     {
         super(image);
         
@@ -49,7 +49,7 @@ public class SheetSprite extends StaticSprite implements SpriteModel
     {
         AffineTransform aold = g.getTransform();
         g.transform(transform);
-        g.drawImage(image, 0, 0, width, height, x0, y0, x1, y1, null);
+        g.drawImage(image.raw, 0, 0, width, height, x0, y0, x1, y1, null);
         g.setTransform(aold);
     }
     
