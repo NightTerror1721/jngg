@@ -74,7 +74,7 @@ public final class InputMaskDispatcher
     }
     
     
-    public final void assignPeripheralIdToMask(InputId code, InputMask mask)
+    public final void assignInputIdToMask(InputId code, InputMask mask)
     {
         SimpleArrayList<InputId> ids = maskBinds.get(mask);
         if(ids == null)
@@ -86,7 +86,7 @@ public final class InputMaskDispatcher
         masks.add(mask);
     }
     
-    public final void unassignPeripheralIdToMask(InputId code, InputMask mask)
+    public final void unassignInputIdToMask(InputId code, InputMask mask)
     {
         SimpleArrayList<InputId> ids = maskBinds.get(mask);
         if(ids == null)
