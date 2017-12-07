@@ -43,7 +43,7 @@ public abstract class Display
         return new WindowDisplay(window, displayMode);
     }
     
-    public static final Display create(DisplayMode displayMode) { return create(new JFrame(), displayMode); }
+    public static final Display create(String title, DisplayMode displayMode) { return create(new JFrame(), displayMode); }
     
     
     

@@ -22,7 +22,7 @@ public final class Main
     {
         System.out.println(DisplayMode.toStringAllDisplayModes());
         
-        Display display = Display.create(DisplayMode.getDisplayMode(640, 480));
+        Display display = Display.create("Test", DisplayMode.getDisplayMode(640, 480));
         display.insertRuntimeStopCallback();
         display.setGameLoop(new GameLoop()
         {
