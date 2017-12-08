@@ -56,7 +56,7 @@ public final class DisplayMode
     public static final DisplayMode getNativeDisplayMode() { return NATIVE_MODE; }
     public static final DisplayMode getDisplayMode(int width, int height, int fps, int bitDepth)
     {
-        DisplayMode mode = new DisplayMode(new java.awt.DisplayMode(width, height, bitDepth, height));
+        DisplayMode mode = new DisplayMode(new java.awt.DisplayMode(width, height, bitDepth, fps));
         if(ALL_MODES.contains(mode))
             return mode;
         throw new IllegalArgumentException("Unsupported display: " + mode);
