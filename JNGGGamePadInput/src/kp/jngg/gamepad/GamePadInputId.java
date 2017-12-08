@@ -40,6 +40,8 @@ public final class GamePadInputId extends InputId
         return name;
     }
     
+    public static InputId getId(int code) { return decode0(code); }
+    
     static final GamePadInputId decode0(int code)
     {
         return new GamePadInputId(((code >>> 5) & 0x1),
