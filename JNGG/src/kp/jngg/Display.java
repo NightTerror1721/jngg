@@ -110,13 +110,7 @@ public abstract class Display
     }
     public final void stop()
     {
-        if(work)
-            work = false;
-        else
-        {
-            work = true;
-            abort();
-        }
+        work = false;
     }
     public final void abort()
     {
