@@ -59,7 +59,7 @@ public class SpriteLoader
         RawBitmap raw = bin(path);
         if(raw == null)
             return raw;
-        raw = new RawBitmap(path);
+        raw = new RawBitmap(this, path);
         bins.put(path, raw);
         return raw;
     }
@@ -86,6 +86,7 @@ public class SpriteLoader
         RawBitmap bin = loadBin(path);
         return sprite(id, new StaticSprite(bin));
     }
+    public static final StaticSprite createStaticSprite(BufferedImage source) { return new StaticSprite(new RawBitmap(source)); }
     
     public final SheetSprite loadSheetSprite(String id, String path, int x0, int y0, int x1, int y1) throws IOException
     {
@@ -95,6 +96,7 @@ public class SpriteLoader
         RawBitmap bin = loadBin(path);
         return sprite(id, new SheetSprite(bin, x0, y0, x1, y1));
     }
+    public final SheetSprite createSheetSprite(BufferedImage source, int x0, int y0, int x1, int y1) { return new SheetSprite(new RawBitmap(source), x0, y0, x1, y1); }
     
     public final AnimatedSpriteModel loadAnimatedSprite(String id, String path, int x, int y, int width, int height, int frames) throws IOException
     {
@@ -103,6 +105,10 @@ public class SpriteLoader
             return s;
         RawBitmap bin = loadBin(path);
         return sprite(id, new AnimatedSpriteModel(bin, x, y, width, height, frames));
+    }
+    public static final AnimatedSpriteModel createAnimatedSprite(BufferedImage source, int x, int y, int width, int height, int frames)
+    {
+        return new AnimatedSpriteModel(new RawBitmap(source), x, y, width, height, frames);
     }
     
     public final <S extends Sprite> S getSprite(String id)
@@ -122,15 +128,21 @@ public class SpriteLoader
     
     
     
-    public final class RawBitmap
+    public static final class RawBitmap
     {
         final String path;
         final BufferedImage raw;
 
-        private RawBitmap(String path) throws IOException
+        private RawBitmap(SpriteLoader loader, String path) throws IOException
         {
             this.path = path;
-            this.raw = ImageIO.read(file(path));
+            this.raw = ImageIO.read(loader.file(path));
+        }
+        
+        private RawBitmap(BufferedImage bi)
+        {
+            this.path = "";
+            this.raw = bi;
         }
 
         public final String getPath() { return path; }
