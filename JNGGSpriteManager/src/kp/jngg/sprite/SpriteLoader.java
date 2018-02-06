@@ -96,7 +96,7 @@ public class SpriteLoader
         RawBitmap bin = loadBin(path);
         return sprite(id, new SheetSprite(bin, x0, y0, x1, y1));
     }
-    public final SheetSprite createSheetSprite(BufferedImage source, int x0, int y0, int x1, int y1) { return new SheetSprite(new RawBitmap(source), x0, y0, x1, y1); }
+    public static final SheetSprite createSheetSprite(BufferedImage source, int x0, int y0, int x1, int y1) { return new SheetSprite(new RawBitmap(source), x0, y0, x1, y1); }
     
     public final AnimatedSpriteModel loadAnimatedSprite(String id, String path, int x, int y, int width, int height, int frames) throws IOException
     {
