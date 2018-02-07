@@ -321,6 +321,9 @@ public class WindowDisplay extends Display
 
     @Override
     public final double getLastDeltaTime() { return delta; }
+    
+    @Override
+    public final Insets getInsets() { return window.getInsets(); }
 
     @Override
     public final int getCurrentFpsPerSecond() { return (int) (fpsPerSecond + 0.5f); }

@@ -7,6 +7,7 @@ package kp.jngg;
 
 import java.awt.Dimension;
 import java.awt.Graphics2D;
+import java.awt.Insets;
 import java.awt.Rectangle;
 import java.util.LinkedList;
 import java.util.ListIterator;
@@ -43,7 +44,7 @@ public abstract class Display
         return new WindowDisplay(window, displayMode);
     }
     
-    public static final Display create(String title, DisplayMode displayMode) { return create(new JFrame(), displayMode); }
+    public static final Display create(String title, DisplayMode displayMode) { return create(new JFrame(title), displayMode); }
     
     
     
@@ -88,6 +89,8 @@ public abstract class Display
     public abstract DisplayMode getDisplayMode();
     
     public abstract double getLastDeltaTime();
+    
+    public abstract Insets getInsets();
     
     public abstract int getCurrentFpsPerSecond();
     public abstract double getExactCurrentFpsPerSecond();
