@@ -21,6 +21,7 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferStrategy;
 import java.util.concurrent.TimeUnit;
 import javax.swing.JDialog;
@@ -38,7 +39,8 @@ public class WindowDisplay extends Display
     
     private final Window window;
     private final JPanel canvas;
-    private final GraphicsDevice gdevice = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();;
+    private final GraphicsDevice gdevice = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+    private final AffineTransform identity = new AffineTransform();
     private DisplayMode mode;
     
     private double sleepTime;
@@ -410,8 +412,9 @@ public class WindowDisplay extends Display
                             Graphics g1 = buffer.getDrawGraphics();
                             g = (Graphics2D) g1.create(x, y, width, height);
                         }
+                        //g.setTransform(identity);
                         g.setColor(Color.BLACK);
-                        g.fillRect(0, 0, window.getWidth(), window.getHeight());
+                        g.fillRect(0, 0, width, height);
                         mainLoop.draw(g);
                         debug.draw(g);
                         g.dispose();

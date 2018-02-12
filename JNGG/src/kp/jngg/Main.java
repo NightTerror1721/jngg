@@ -5,9 +5,11 @@
  */
 package kp.jngg;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.Stroke;
 import kp.jngg.input.MouseButton;
 import kp.jngg.input.MouseWheel;
 import kp.jngg.input.TypeKeyboard;
@@ -35,7 +37,11 @@ public final class Main
             @Override
             public void draw(Graphics2D g)
             {
-                
+                Stroke s = g.getStroke();
+                g.setStroke(new BasicStroke(4));
+                g.setColor(Color.RED);
+                g.drawRect(0, 0, display.getWidth(), display.getHeight());
+                g.setStroke(s);
             }
 
             @Override
