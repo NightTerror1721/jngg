@@ -57,7 +57,7 @@ public class SpriteLoader
     private RawBitmap loadBin(String path) throws IOException
     {
         RawBitmap raw = bin(path);
-        if(raw == null)
+        if(raw != null)
             return raw;
         raw = new RawBitmap(this, path);
         bins.put(path, raw);
