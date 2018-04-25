@@ -72,7 +72,7 @@ public abstract class Sprite
     {
         AffineTransform af = new AffineTransform();
         af.setToTranslation(x, y);
-        af.scale(width / width(), height / height());
+        af.scale((float) width / width(), (float) height / height());
         draw(g, af);
     }
     
@@ -101,7 +101,7 @@ public abstract class Sprite
         AffineTransform af = new AffineTransform();
         af.setToTranslation(x, y);
         af.rotate(rotationRadians, width / 2, height / 2);
-        af.scale(width / width(), height / height());
+        af.scale((float) width / width(), (float) height / height());
         draw(g, af);
     }
     
@@ -130,7 +130,7 @@ public abstract class Sprite
         AffineTransform af = new AffineTransform();
         af.setToTranslation(x, y);
         af.rotate(rotationRadians, width / 2, height / 2);
-        af.scale(width / width(), height / height());
+        af.scale((float) width / width(), (float) height / height());
         draw(g, af);
     }
     
@@ -185,15 +185,15 @@ public abstract class Sprite
         {
             case HORIZONTAL:
                 af.setToTranslation(x + width, y);
-                af.scale(-width / width(), height / height());
+                af.scale((float) -width / width(), (float) height / height());
                 break;
             case VERTICAL:
                 af.setToTranslation(x, y + height);
-                af.scale(width / width(), -height / height());
+                af.scale((float) width / width(), (float) -height / height());
                 break;
             case BOTH:
                 af.setToTranslation(x + width, y + height);
-                af.scale(-width / width(), -height / height());
+                af.scale((float) -width / width(), (float) -height / height());
                 break;
         }
         draw(g, af);
@@ -257,17 +257,17 @@ public abstract class Sprite
             case HORIZONTAL:
                 af.setToTranslation(x + width, y);
                 af.rotate(rotationRadians, width / 2, height / 2);
-                af.scale(-width / width(), height / height());
+                af.scale((float) -width / width(), (float) height / height());
                 break;
             case VERTICAL:
                 af.setToTranslation(x, y + height);
                 af.rotate(rotationRadians, width / 2, height / 2);
-                af.scale(width / width(), -height / height());
+                af.scale((float) width / width(), (float) -height / height());
                 break;
             case BOTH:
                 af.setToTranslation(x + width, y + height);
                 af.rotate(rotationRadians, width / 2, height / 2);
-                af.scale(-width / width(), -height / height());
+                af.scale((float) -width / width(), (float) -height / height());
                 break;
         }
         draw(g, af);
@@ -331,17 +331,17 @@ public abstract class Sprite
             case HORIZONTAL:
                 af.setToTranslation(x + width, y);
                 af.rotate(rotationRadians, width / 2, height / 2);
-                af.scale(-width / width(), height / height());
+                af.scale((float) -width / width(), (float) height / height());
                 break;
             case VERTICAL:
                 af.setToTranslation(x, y + height);
                 af.rotate(rotationRadians, width / 2, height / 2);
-                af.scale(width / width(), -height / height());
+                af.scale((float) width / width(), (float) -height / height());
                 break;
             case BOTH:
                 af.setToTranslation(x + width, y + height);
                 af.rotate(rotationRadians, width / 2, height / 2);
-                af.scale(-width / width(), -height / height());
+                af.scale((float) -width / width(), (float) -height / height());
                 break;
         }
         draw(g, af);
