@@ -851,4 +851,71 @@ public class Vector2
         if (a < -Math.PI) return a + (Math.PI * 2);
         return a;
     }
+    
+    public Vector2 ensureRangeLocal(double xCoord, double yCoord)
+    {
+        xCoord = xCoord < 0 ? -xCoord : xCoord;
+        yCoord = yCoord < 0 ? -yCoord : yCoord;
+        
+        x = x < -xCoord ? -xCoord : x > xCoord ? xCoord : x;
+        y = y < -yCoord ? -yCoord : y > yCoord ? yCoord : y;
+        
+        return this;
+    }
+    public Vector2 ensureRange(double xCoord, double yCoord)
+    {
+        return new Vector2(this).ensureRangeLocal(xCoord, yCoord);
+    }
+    
+    public Vector2 ensureRangeLocal(double xMinCoord, double yMinCoord, double xMaxCoord, double yMaxCoord)
+    {
+        x = Math.max(Math.min(x, xMinCoord), xMaxCoord);
+        y = Math.max(Math.min(x, yMinCoord), yMaxCoord);
+        
+        return this;
+    }
+    public Vector2 ensureRange(double xMinCoord, double yMinCoord, double xMaxCoord, double yMaxCoord)
+    {
+        return new Vector2(this).ensureRangeLocal(xMinCoord, yMinCoord, xMaxCoord, yMaxCoord);
+    }
+    
+    public Vector2 ensureRangeXLocal(double coord)
+    {
+        coord = coord < 0 ? -coord : coord;
+        x = x < -coord ? -coord : x > coord ? coord : x;
+        return this;
+    }
+    public Vector2 ensureRangeXLocal(double minCoord, double maxCoord)
+    {
+        x = Math.max(Math.min(x, minCoord), maxCoord);
+        return this;
+    }
+    public Vector2 ensureRangeX(double coord)
+    {
+        return new Vector2(this).ensureRangeXLocal(coord);
+    }
+    public Vector2 ensureRangeX(double minCoord, double maxCoord)
+    {
+        return new Vector2(this).ensureRangeXLocal(minCoord, maxCoord);
+    }
+    
+    public Vector2 ensureRangeYLocal(double coord)
+    {
+        coord = coord < 0 ? -coord : coord;
+        y = y < -coord ? -coord : y > coord ? coord : y;
+        return this;
+    }
+    public Vector2 ensureRangeYLocal(double minCoord, double maxCoord)
+    {
+        y = Math.max(Math.min(y, minCoord), maxCoord);
+        return this;
+    }
+    public Vector2 ensureRangeY(double coord)
+    {
+        return new Vector2(this).ensureRangeYLocal(coord);
+    }
+    public Vector2 ensureRangeY(double minCoord, double maxCoord)
+    {
+        return new Vector2(this).ensureRangeYLocal(minCoord, maxCoord);
+    }
 }
