@@ -8,6 +8,7 @@ package kp.jngg.sprite;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiConsumer;
@@ -87,6 +88,8 @@ public class SpriteLoader
         return sprite(id, new StaticSprite(bin));
     }
     public static final StaticSprite createStaticSprite(BufferedImage source) { return new StaticSprite(new RawBitmap(source)); }
+    public static final StaticSprite createStaticSprite(File source) throws IOException { return new StaticSprite(new RawBitmap(ImageIO.read(source))); }
+    public static final StaticSprite createStaticSprite(InputStream source) throws IOException { return new StaticSprite(new RawBitmap(ImageIO.read(source))); }
     
     public final SheetSprite loadSheetSprite(String id, String path, int x0, int y0, int x1, int y1) throws IOException
     {
