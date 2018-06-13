@@ -6,6 +6,8 @@
 package kp.jngg.math;
 
 import java.awt.geom.Point2D;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 
 
@@ -918,4 +920,19 @@ public class Vector2
     {
         return new Vector2(this).ensureRangeYLocal(minCoord, maxCoord);
     }
+    
+    public Vector2 setScale(int xScale, int yScale, RoundingMode roundingMode)
+    {
+        x = new BigDecimal(Double.toString(x)).setScale(xScale, roundingMode).doubleValue();
+        y = new BigDecimal(Double.toString(y)).setScale(yScale, roundingMode).doubleValue();
+        return this;
+    }
+    public Vector2 setScale(int scale, RoundingMode roundingMode) { return setScale(scale, scale, roundingMode); }
+    public Vector2 setScale(int xScale, int yScale) { return setScale(xScale, yScale, RoundingMode.DOWN); }
+    public Vector2 setScale(int scale) { return setScale(scale, scale, RoundingMode.DOWN); }
+    
+    public Vector2 scale(int xScale, int yScale, RoundingMode roundingMode) { return new Vector2(this).setScale(xScale, yScale, roundingMode); }
+    public Vector2 scale(int scale, RoundingMode roundingMode) { return new Vector2(this).setScale(scale, roundingMode); }
+    public Vector2 scale(int xScale, int yScale) { return new Vector2(this).setScale(xScale, yScale); }
+    public Vector2 scale(int scale) { return new Vector2(this).setScale(scale); }
 }

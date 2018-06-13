@@ -58,7 +58,7 @@ public class DefaultFont implements Font
     }
     public DefaultFont(String path, int size, Color color)
     {
-        fnt = Text.newFont(path).deriveFont((float)size);
+        fnt = Text.loadFont(path).deriveFont((float)size);
         this.size = size;
         this.color = color;
     }

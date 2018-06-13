@@ -80,7 +80,7 @@ public final class Text
         g2.drawString(text, x - (d.width), y - (d.height) + asc);
     }
     
-    public static Font newFont(String path)
+    public static final Font loadFont(String path)
     {
         try
         {
@@ -90,6 +90,18 @@ public final class Text
         {
             ex.printStackTrace(System.err);
             return null;
+        }
+    }
+    
+    public static final Font loadOrInstanceFont(String pathOrName)
+    {
+        try
+        {
+            return Font.createFont(Font.TRUETYPE_FONT, new File(pathOrName));
+        }
+        catch(FontFormatException | IOException ex)
+        {
+            return new Font(pathOrName, Font.PLAIN, 12);
         }
     }
 }
