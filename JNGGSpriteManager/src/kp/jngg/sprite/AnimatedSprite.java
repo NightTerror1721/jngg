@@ -80,6 +80,18 @@ public final class AnimatedSprite extends Sprite
     
     public final boolean hasEnded() { return end; }
     
+    public final void start() { end = false; }
+    public final void stop() { end = true; }
+    
+    public final void setCurrentFrame(int frame) { iterator = frame; }
+    public final void setExactCurrentFrame(float frame) { iterator = frame; }
+    
+    public final int getCurrentFrame() { return (int) iterator; }
+    public final float getExactCurrentFrame() { return iterator; }
+    
+    public final void rewind() { setCurrentFrame(0); }
+    public final void fastForward() { setCurrentFrame(frames); }
+    
     @Override
     public final AnimatedSpriteModel getModel() { return model; }
 
@@ -122,7 +134,7 @@ public final class AnimatedSprite extends Sprite
                 if(state() != 0)
                 {
                     end = true;
-                    iterator = 0;
+                    //iterator = 0;
                 }
             } break;
             case LOOP_MODE: {
