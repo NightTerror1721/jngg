@@ -49,6 +49,7 @@ public final class AnimatedSprite extends Sprite
         this.width = width;
         this.height = height;
         this.frames = frames;
+        this.end = true;
     }
     
     public final void setRandomMode(double min, double max)
