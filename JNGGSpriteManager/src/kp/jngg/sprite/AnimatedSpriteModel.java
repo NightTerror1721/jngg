@@ -37,7 +37,7 @@ public class AnimatedSpriteModel implements SpriteModel
     public final int getFrames() { return frames; }
     
     @Override
-    public Sprite buildSprite() { return new AnimatedSprite(this, base.raw, x, y, width, height, frames); }
+    public AnimatedSprite buildSprite() { return new AnimatedSprite(this, base.raw, x, y, width, height, frames); }
 
     @Override
     public RawBitmap getRaw() { return base; }
