@@ -116,10 +116,10 @@ public class SpriteLoader
     
     public final <S extends Sprite> S getSprite(String id)
     {
-        S s = sprite(id);
-        if(s == null)
+        SpriteModel model = sprite(id);
+        if(model == null)
             throw new IllegalArgumentException("Sprite " + id + " not found");
-        return s;
+        return (S) model.buildSprite();
     }
     
     
