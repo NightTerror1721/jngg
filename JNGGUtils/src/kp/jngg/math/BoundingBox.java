@@ -127,7 +127,7 @@ public class BoundingBox
     }
     public boolean contains(double x, double y)
     {
-        return x0 >= x && y0 >= y &&
-               x1 <= x && y1 <= y;
+        return x0 <= x && y0 <= y &&
+               x1 >= x && y1 >= y;
     }
 }
