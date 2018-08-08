@@ -54,6 +54,10 @@ public class BoundingBox
     {
         return resituateLeftTopPoint(point.x, point.y, size);
     }
+    public final BoundingBox resituateLeftTopPoint(Vector2 point, Vector2 size)
+    {
+        return resituateLeftTopPoint(point.x, point.y, size.x, size.y);
+    }
     public final BoundingBox resituate(double x, double y, double sizeX, double sizeY)
     {
         double sizeX2 = sizeX / 2d;
@@ -62,6 +66,14 @@ public class BoundingBox
         y0 = y - sizeY2;
         x1 = x + sizeX2;
         y1 = y + sizeY2;
+        return this;
+    }
+    public final BoundingBox resituateLeftTopPoint(double x, double y, double sizeX, double sizeY)
+    {
+        x0 = x;
+        y0 = y;
+        x1 = x + sizeX;
+        y1 = y + sizeY;
         return this;
     }
     public final BoundingBox resituate(double x, double y, double size)
