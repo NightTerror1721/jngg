@@ -871,8 +871,8 @@ public class Vector2
     
     public Vector2 ensureRangeLocal(double xMinCoord, double yMinCoord, double xMaxCoord, double yMaxCoord)
     {
-        x = Math.max(Math.min(x, xMinCoord), xMaxCoord);
-        y = Math.max(Math.min(x, yMinCoord), yMaxCoord);
+        x = Math.min(Math.max(x, xMinCoord), xMaxCoord);
+        y = Math.min(Math.max(x, yMinCoord), yMaxCoord);
         
         return this;
     }
@@ -889,7 +889,7 @@ public class Vector2
     }
     public Vector2 ensureRangeXLocal(double minCoord, double maxCoord)
     {
-        x = Math.max(Math.min(x, minCoord), maxCoord);
+        x = Math.min(Math.max(x, minCoord), maxCoord);
         return this;
     }
     public Vector2 ensureRangeX(double coord)
@@ -909,7 +909,7 @@ public class Vector2
     }
     public Vector2 ensureRangeYLocal(double minCoord, double maxCoord)
     {
-        y = Math.max(Math.min(y, minCoord), maxCoord);
+        y = Math.min(Math.max(y, minCoord), maxCoord);
         return this;
     }
     public Vector2 ensureRangeY(double coord)
