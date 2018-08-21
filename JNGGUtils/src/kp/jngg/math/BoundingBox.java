@@ -5,6 +5,9 @@
  */
 package kp.jngg.math;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
+
 /**
  *
  * @author Asus
@@ -129,5 +132,13 @@ public class BoundingBox
     {
         return x0 <= x && y0 <= y &&
                x1 >= x && y1 >= y;
+    }
+    
+    public void draw(Graphics2D g, Color color)
+    {
+        Color old = g.getColor();
+        g.setColor(color);
+        g.drawRect((int) x0, (int) y0, (int) (x1 - x0), (int) (y1 - y0));
+        g.setColor(old);
     }
 }

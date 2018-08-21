@@ -7,6 +7,7 @@ package kp.jngg;
 
 import java.awt.Dimension;
 import java.awt.Graphics2D;
+import java.awt.GraphicsEnvironment;
 import java.awt.Insets;
 import java.awt.Rectangle;
 import java.util.LinkedList;
@@ -25,6 +26,11 @@ import kp.jngg.input.InputMaskDispatcher;
  */
 public abstract class Display
 {
+    static {
+        System.setProperty("sun.java2d.opengl","True");
+        GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
+    }
+    
     protected final InputDispatcher inputs = new InputDispatcher();
     protected final DebugInfo debug = new DebugInfo(this);
     protected GameLoop mainLoop = DEFAULT_GAME_LOOP;
@@ -155,12 +161,6 @@ public abstract class Display
     public final void insertRuntimeStopCallback()
     {
         RUNTIME.addShutdownHook(new Thread(this::abort));
-    }
-    
-    
-    
-    static {
-        System.setProperty("sun.java2d.opengl","True");
     }
     
     private static final Runtime RUNTIME = Runtime.getRuntime();

@@ -19,7 +19,7 @@ import kp.jngg.input.TypeKeyboard;
  * @author mpasc
  */
 public final class Main
-{
+{    
     public static void main(String[] args)
     {
         System.out.println(DisplayMode.toStringAllDisplayModes());
