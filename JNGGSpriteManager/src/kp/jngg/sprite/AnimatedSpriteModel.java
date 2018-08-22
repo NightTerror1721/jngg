@@ -42,4 +42,7 @@ public class AnimatedSpriteModel implements SpriteModel
     @Override
     public RawBitmap getRaw() { return base; }
     
+    @Override
+    public int getModelType() { return SpriteModel.TYPE_ANIMATED; }
+    
 }

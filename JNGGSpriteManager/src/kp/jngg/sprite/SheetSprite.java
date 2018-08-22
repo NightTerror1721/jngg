@@ -55,4 +55,7 @@ public class SheetSprite extends StaticSprite
     
     @Override
     public SheetSprite buildSprite() { return this; }
+    
+    @Override
+    public int getModelType() { return SpriteModel.TYPE_SHEET; }
 }

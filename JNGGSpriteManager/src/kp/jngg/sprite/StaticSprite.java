@@ -43,4 +43,7 @@ public class StaticSprite extends Sprite implements SpriteModel
     @Override
     public final RawBitmap getRaw() { return image; }
     
+    @Override
+    public int getModelType() { return SpriteModel.TYPE_STATIC; }
+    
 }

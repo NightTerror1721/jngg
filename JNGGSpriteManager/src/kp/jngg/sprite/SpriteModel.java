@@ -15,4 +15,9 @@ public interface SpriteModel
 {
     Sprite buildSprite();
     RawBitmap getRaw();
+    int getModelType();
+    
+    int TYPE_STATIC     = 0;
+    int TYPE_SHEET      = 1;
+    int TYPE_ANIMATED   = 2;
 }
