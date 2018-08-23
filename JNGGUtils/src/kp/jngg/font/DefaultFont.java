@@ -70,6 +70,10 @@ public class DefaultFont implements Font
         this.color = color;
     }
     
+    public final DefaultFont copy() { return new DefaultFont(fnt, size, color); }
+    
+    public final Dimension getTextSize(String text) { return Text.stringDim(frtDef,text,fnt); }
+    
     @Override
     public void setColor(Color color) { this.color = color; }
     public Color getColor() { return color; }

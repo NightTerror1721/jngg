@@ -26,4 +26,6 @@ public class IntegerInputData extends InputData
     @Override
     public String toString() { return super.toString() + " value: " + value; }
     
+    @Override
+    public final float getData() { return value; }
 }

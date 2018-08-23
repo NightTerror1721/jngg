@@ -16,6 +16,7 @@ public abstract class InputData
     
     public abstract boolean isPressed();
     public abstract boolean isReleased();
+    public abstract float getData();
     
     @Override
     public String toString()
@@ -35,5 +36,7 @@ public abstract class InputData
         @Override
         public boolean isReleased() { return !pressed; }
         
+        @Override
+        public final float getData() { return pressed ? 1f : 0f; }
     }
 }

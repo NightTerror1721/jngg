@@ -69,6 +69,9 @@ public class MouseCatcher extends MouseTracker
         public boolean isReleased() { return false; }
         
         @Override
+        public float getData() { return deltaX != 0 && deltaY != 0 ? 1f : 0f; }
+        
+        @Override
         public String toString() { return super.toString() + " deltas: [" + deltaX + ", " + deltaY + "]"; }
     }
 }

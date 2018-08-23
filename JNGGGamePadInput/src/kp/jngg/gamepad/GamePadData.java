@@ -15,7 +15,7 @@ public class GamePadData extends InputData
 {
     final float value;
     
-    GamePadData(float value) { this.value = value; }
+    GamePadData(float value) { this.value = value < 0 ? -value : value; }
     GamePadData(boolean value) { this.value = value ? 1f : 0f; }
     
     public final float getValue() { return value; }
@@ -25,6 +25,9 @@ public class GamePadData extends InputData
 
     @Override
     public boolean isReleased() { return value == 0; }
+    
+    @Override
+    public float getData() { return value; }
     
     @Override
     public String toString() { return super.toString() + " value: " + value; }
