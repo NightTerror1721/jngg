@@ -45,23 +45,23 @@ public class BoundingBox
         return this;
     }
     
-    public final BoundingBox resituate(Vector2 position, double size)
+    public BoundingBox resituate(Vector2 position, double size)
     {
         return resituate(position.x, position.y, size);
     }
-    public final BoundingBox resituate(Vector2 position, Vector2 size)
+    public BoundingBox resituate(Vector2 position, Vector2 size)
     {
         return resituate(position.x, position.y, size.x, size.y);
     }
-    public final BoundingBox resituateLeftTopPoint(Vector2 point, double size)
+    public BoundingBox resituateLeftTopPoint(Vector2 point, double size)
     {
         return resituateLeftTopPoint(point.x, point.y, size);
     }
-    public final BoundingBox resituateLeftTopPoint(Vector2 point, Vector2 size)
+    public BoundingBox resituateLeftTopPoint(Vector2 point, Vector2 size)
     {
         return resituateLeftTopPoint(point.x, point.y, size.x, size.y);
     }
-    public final BoundingBox resituate(double x, double y, double sizeX, double sizeY)
+    public BoundingBox resituate(double x, double y, double sizeX, double sizeY)
     {
         double sizeX2 = sizeX / 2d;
         double sizeY2 = sizeY / 2d;
@@ -71,7 +71,7 @@ public class BoundingBox
         y1 = y + sizeY2;
         return this;
     }
-    public final BoundingBox resituateLeftTopPoint(double x, double y, double sizeX, double sizeY)
+    public BoundingBox resituateLeftTopPoint(double x, double y, double sizeX, double sizeY)
     {
         x0 = x;
         y0 = y;
@@ -79,7 +79,7 @@ public class BoundingBox
         y1 = y + sizeY;
         return this;
     }
-    public final BoundingBox resituate(double x, double y, double size)
+    public BoundingBox resituate(double x, double y, double size)
     {
         double size2 = size / 2d;
         x0 = x - size2;
@@ -89,7 +89,7 @@ public class BoundingBox
         return this;
     }
     
-    public final BoundingBox resituateLeftTopPoint(double x, double y, double size)
+    public BoundingBox resituateLeftTopPoint(double x, double y, double size)
     {
         x0 = x;
         y0 = y;
