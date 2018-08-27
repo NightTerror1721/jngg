@@ -70,4 +70,18 @@ public final class BBContainer
     {
         bbox.resituateLeftTopPoint(position.x + localPosition.x, position.y + localPosition.y, localSize.x, localSize.y);
     }
+    
+    
+    public final boolean hasCollision(BBContainer other)
+    {
+        return bbox.hasCollision(other.bbox);
+    }
+    
+    public final boolean hasCollision(BoundingBox other)
+    {
+        return bbox.hasCollision(other);
+    }
+    
+    public final boolean contains(double x, double y) { return bbox.contains(x, y); }
+    public final boolean contains(Vector2 point) { return bbox.contains(point); }
 }
