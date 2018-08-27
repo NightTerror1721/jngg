@@ -14,8 +14,8 @@ import kp.jngg.math.Vector2;
  */
 public final class BBContainer
 {
-    private final Vector2 localPosition;
-    private final Vector2 localSize;
+    private final Vector2 localPosition = new Vector2();
+    private final Vector2 localSize = new Vector2(1, 1);
     private BoundingBox bbox;
     
     public BBContainer(BoundingBox bbox)
