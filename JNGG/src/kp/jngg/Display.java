@@ -24,7 +24,7 @@ import kp.jngg.input.InputMaskDispatcher;
  *
  * @author mpasc
  */
-public abstract class Display
+public abstract class Display implements DrawingArea
 {
     static {
         System.setProperty("sun.java2d.opengl","True");
@@ -82,10 +82,10 @@ public abstract class Display
     public abstract void addInput(Input input);
     public abstract void removeInput(Input input);
     
-    public abstract int getX();
-    public abstract int getY();
-    public abstract int getWidth();
-    public abstract int getHeight();
+    @Override public abstract int getX();
+    @Override public abstract int getY();
+    @Override public abstract int getWidth();
+    @Override public abstract int getHeight();
     public abstract int getRefreshRate();
     
     public abstract void setFullscreen(boolean flag);

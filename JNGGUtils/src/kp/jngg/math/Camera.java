@@ -12,7 +12,7 @@ import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.NoninvertibleTransformException;
 import java.awt.geom.Point2D;
-import kp.jngg.Display;
+import kp.jngg.DrawingArea;
 
 /**
  *
@@ -44,7 +44,7 @@ public class Camera
         canvas = null;
         drawPos = null;
     }
-    public Camera(Display display) { this(display.getWidth(), display.getHeight()); }
+    public Camera(DrawingArea canvas) { this(canvas.getWidth(), canvas.getHeight()); }
     
     public static final void setPixelsPerMeter(double pixels) throws IllegalArgumentException
     {
