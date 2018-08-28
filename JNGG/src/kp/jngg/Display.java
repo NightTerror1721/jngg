@@ -173,6 +173,8 @@ public abstract class Display implements DrawingArea
     public static final float getTotalMemoryInKb() { return getTotalMemory() / 1024f; }
     public static final float getTotalMemoryInMb() { return getTotalMemory() / 1024f / 1024f; }
     
+    public static final void enableOpenGL() { System.setProperty("sun.java2d.opengl","True"); }
+    
     private static final GameLoop DEFAULT_GAME_LOOP = new GameLoop()
     {
         @Override

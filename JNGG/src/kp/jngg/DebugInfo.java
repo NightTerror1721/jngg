@@ -77,12 +77,12 @@ public final class DebugInfo
             text = Float.toString(Display.getMemoryUsedInMb());
             if(text.length() > 5)
                 text = text.substring(0,5);
-            text = "Memory usage = " + text + "MB";
+            text = "Memory => Used: " + text + "MB";
             text2 = Float.toString(Display.getTotalMemoryInMb());
             if(text2.length() > 5)
                 text2 = text2.substring(0,5);
-            text2 = "Total reserved memory = " + text2 + "MB";
-            text += "   |   " + text2;
+            text2 = "Total: " + text2 + "MB";
+            text += " | " + text2;
             dim = getStringDimensions(text,g,font);
             y += 3 + dim.height;
             g.drawString(text,x,y);
