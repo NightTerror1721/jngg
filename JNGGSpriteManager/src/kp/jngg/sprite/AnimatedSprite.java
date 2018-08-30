@@ -92,6 +92,7 @@ public final class AnimatedSprite extends Sprite
     
     public final void rewind() { setCurrentFrame(0); }
     public final void fastForward() { setCurrentFrame(frames); }
+    public final int getFrameCount() { return frames; }
     
     @Override
     public final AnimatedSpriteModel getModel() { return model; }
