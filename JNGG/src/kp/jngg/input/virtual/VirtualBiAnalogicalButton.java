@@ -5,6 +5,7 @@
  */
 package kp.jngg.input.virtual;
 
+import kp.jngg.input.BindingObject;
 import kp.jngg.input.InputEvent;
 import kp.jngg.input.InputId;
 import kp.jngg.input.InputMask;

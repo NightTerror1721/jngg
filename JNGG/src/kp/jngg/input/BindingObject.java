@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package kp.jngg.input.virtual;
+package kp.jngg.input;
 
 import kp.jngg.input.InputEvent;
 import kp.jngg.input.InputId;
