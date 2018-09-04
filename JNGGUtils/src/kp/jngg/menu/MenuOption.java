@@ -63,7 +63,7 @@ public abstract class MenuOption
         g.setColor(old);
     }*/
     
-    public void onSelect(MenuController controller) {}
+    //public void onSelect(MenuController controller) {}
     public void onAction(MenuController controller) {}
     public void onBack(MenuController controller) {}
     public void onUp(MenuController controller) {}

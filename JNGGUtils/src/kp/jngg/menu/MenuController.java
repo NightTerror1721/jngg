@@ -115,6 +115,8 @@ public class MenuController
     public final MenuOption getCurrentOption() { return current; }
     public final MenuOption getLastOption() { return last; }
     
+    public final boolean isCurrentOption(MenuOption option) { return option == current; }
+    
     public final void goTo(MenuOption newOption)
     {
         last = current;
