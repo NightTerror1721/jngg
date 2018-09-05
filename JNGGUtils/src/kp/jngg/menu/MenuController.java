@@ -60,8 +60,8 @@ public class MenuController
     }
     public final void setSize(double width, double height)
     {
-        this.width = x;
-        this.height = y;
+        this.width = width;
+        this.height = height;
     }
     public final void setWidth(double width) { this.width = width; }
     public final void setHeight(double height) { this.height = height; }
@@ -175,7 +175,7 @@ public class MenuController
     
     public final void dispatchEvent(InputEvent event)
     {
-        if(current != null)
+        if(current != null && event.isPressed())
         {
             if(actionInput != null && actionInput.check(event))
                 current.onAction(this);

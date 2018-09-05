@@ -19,7 +19,9 @@ import kp.jngg.input.InputEvent;
 public class Menu extends MenuOption
 {
     private final ArrayList<MenuOption> options = new ArrayList<>();
+    private MenuOption back;
     private boolean showTitle;
+    private boolean centeredOptions;
     
     private CustomEventAction onAction;
     private CustomEventAction onBack;
@@ -87,6 +89,36 @@ public class Menu extends MenuOption
     public final void setShowTitle(boolean flag) { this.showTitle = flag; }
     public final boolean isShowTitleEnabled() { return showTitle; }
     
+    public final void setBack(MenuOption back) { this.back = back; }
+    public final MenuOption getBack() { return back; }
+    
+    public final void setSelectedIndex(int index)
+    {
+        this.selected = index;
+        updateFirstOption();
+    }
+    public final int getSelectedIndex() { return selected; }
+    public final <O extends MenuOption> O getSelectedOption()
+    {
+        return selected < 0 || selected >= options.size() ? null : (O) options.get(selected);
+    }
+    public final int getOptionCount() { return options.size(); }
+    
+    public final void setTitlePosition(int position) { this.titlePos = position; }
+    public final int getTitlePosition() { return titlePos; }
+    
+    public final void setFirstOptionPosition(int position) { this.firstPos = position; }
+    public final int getFirstOptionPosition(int position) { return firstPos; }
+    
+    public final void setPrintCenteredOptions(boolean flag) { this.centeredOptions = flag; }
+    public final boolean isPrintCenteredOptionsEnabled() { return centeredOptions; }
+    
+    public final void copyTitleAndOptionPositions(Menu menu)
+    {
+        this.titlePos = menu.titlePos;
+        this.firstPos = menu.firstPos;
+    }
+    
     public final void setCustomOnAction(CustomEventAction eventAction) { this.onAction = eventAction; }
     public final void setCustomOnBack(CustomEventAction eventAction) { this.onBack = eventAction; }
     public final void setCustomOnUp(CustomEventAction eventAction) { this.onUp = eventAction; }
@@ -97,17 +129,13 @@ public class Menu extends MenuOption
     public void update(double delta, MenuController controller)
     {
         this.space = (int) controller.getOptionSeparation();
-        if(showTitle)
+        if(centeredOptions)
         {
-            titlePos = (int) (controller.getPositionY() + space);
-            firstPos = titlePos + titlePos / 2;
+            if(showTitle)
+                max = (int) ((controller.getHeight() - (titlePos + controller.getTitleSize() / 2 + space)) / (controller.getNormalSize() + space));
+            else max = (int) ((controller.getHeight() - controller.getPositionY()) / (controller.getNormalSize() + space));
         }
-        else
-        {
-            titlePos = -1;
-            firstPos = (int) (controller.getPositionY() + space);
-        }
-        max = (int) ((controller.getNormalSize() + space) / (controller.getHeight() - controller.getPositionY()));
+        else max = (int) ((controller.getHeight() - firstPos) / (controller.getNormalSize() + space));
         center = (int) (controller.getPositionX() + controller.getWidth() / 2d);
         updateFirstOption();
     }
@@ -120,34 +148,67 @@ public class Menu extends MenuOption
         if(showTitle)
         {
             int titleSize = controller.getTitleSize();
+            font.setColor(controller.getTitleColor());
             font.setDimensions(titleSize);
-            font.printCentre(g, getOptionTitle(), center, firstPos);
+            font.printCentre(g, getOptionTitle(), center, titlePos);
         }
         
         int len = options.size();
         int nsize = controller.getNormalSize();
         Color ncolor = controller.getNormalColor();
-        len = len > max ? max : len;
-        for(int i=0;i<len && first + i < options.size();i++)
+        //len = len > max ? max : len;
+        if(centeredOptions)
         {
-            int idx = i + first;
-            MenuOption option = options.get(idx);
-            if(option.isLocked())
+            MenuOption[] array = new MenuOption[len];
+            int showLen = 0;
+            int sel = 0;
+            for(int idx = first; idx < len && showLen < max; idx++)
             {
-                i--;
-                continue;
+                MenuOption option = options.get(idx);
+                if(!option.isLocked())
+                {
+                    if(idx == selected)
+                        sel = showLen;
+                    array[showLen++] = option;
+                }
             }
-            if(selected == idx)
+            
+            int newFirstPos = firstPos - (((showLen - 1) * nsize) + ((showLen - 1) * space)) / 2;
+            for(int i=0;i<showLen;i++)
             {
-                font.setColor(controller.getSelectedColor());
-                font.setDimensions(controller.getSelectedSize());
+                if(i == sel)
+                {
+                    font.setColor(controller.getSelectedColor());
+                    font.setDimensions(controller.getSelectedSize());
+                }
+                else
+                {
+                    font.setColor(ncolor);
+                    font.setDimensions(nsize);
+                }
+                font.printCentre(g, array[i].getOptionTitle(), center, newFirstPos + ((i * nsize) + (i * space)));
             }
-            else
+        }
+        else
+        {
+            for(int idx = first, i = 0; idx < len && i < max; idx++)
             {
-                font.setColor(ncolor);
-                font.setDimensions(nsize);
+                MenuOption option = options.get(idx);
+                if(option.isLocked())
+                    continue;
+                if(selected == idx)
+                {
+                    font.setColor(controller.getSelectedColor());
+                    font.setDimensions(controller.getSelectedSize());
+                }
+                else
+                {
+                    font.setColor(ncolor);
+                    font.setDimensions(nsize);
+                }
+                font.printCentre(g, option.getOptionTitle(), center, firstPos + ((i * nsize) + (i * space)));
+                i++;
             }
-            font.printCentre(g, option.getOptionTitle(), center, (i * nsize) + ((i + 1) * space));
         }
         
         String desc = options.get(selected).getDescription();
@@ -171,15 +232,14 @@ public class Menu extends MenuOption
     {
         int count = options.size();
         if(count <= max)
-        {
             first = 0;
-            return;
+        else
+        {
+            if(selected < first)
+                first = selected;
+            else if(selected >= first + max)
+                first = selected - max + 1;
         }
-        
-        if(selected < first)
-            first = selected;
-        else if(selected >= first + max)
-            first = selected - max;
         
         if(selected < 0)
         {
@@ -211,7 +271,11 @@ public class Menu extends MenuOption
     public void onBack(MenuController controller)
     {
         if((onBack == null || onBack.execute(controller)) && controller.isCurrentOption(this))
-            controller.goToLast();
+        {
+            if(back != null)
+                controller.goTo(back);
+            else controller.goToLast();
+        }
     }
     
     @Override
@@ -219,7 +283,7 @@ public class Menu extends MenuOption
     {
         if((onUp == null || onUp.execute(controller)) && controller.isCurrentOption(this))
         {
-            first--;
+            selected--;
             updateFirstOption();
         }
     }
@@ -229,7 +293,7 @@ public class Menu extends MenuOption
     {
         if((onDown == null || onDown.execute(controller)) && controller.isCurrentOption(this))
         {
-            first++;
+            selected++;
             updateFirstOption();
         }
     }
