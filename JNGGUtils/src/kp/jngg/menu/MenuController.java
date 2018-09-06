@@ -121,6 +121,9 @@ public class MenuController
     {
         last = current;
         current = Objects.requireNonNull(newOption);
+        if(last != null)
+            last.onExiting(this);
+        current.onEntering(this);
     }
     public final void goToRoot() { goTo(root); }
     public final void goToLast()

@@ -22,11 +22,14 @@ public class Menu extends MenuOption
     private MenuOption back;
     private boolean showTitle;
     private boolean centeredOptions;
+    private boolean keepSelectedIndex = true;
     
     private CustomEventAction onAction;
     private CustomEventAction onBack;
     private CustomEventAction onUp;
     private CustomEventAction onDown;
+    private CustomEventAction onEntering;
+    private CustomEventAction onExiting;
     private CustomDefaultEventAction onDefaultEvent;
     
     private int selected;
@@ -113,6 +116,9 @@ public class Menu extends MenuOption
     public final void setPrintCenteredOptions(boolean flag) { this.centeredOptions = flag; }
     public final boolean isPrintCenteredOptionsEnabled() { return centeredOptions; }
     
+    public final void setKeepSelectedIndex(boolean flag) { keepSelectedIndex = flag; }
+    public final boolean isKeepSelectedIndexEnabled() { return keepSelectedIndex; }
+    
     public final void copyTitleAndOptionPositions(Menu menu)
     {
         this.titlePos = menu.titlePos;
@@ -123,6 +129,8 @@ public class Menu extends MenuOption
     public final void setCustomOnBack(CustomEventAction eventAction) { this.onBack = eventAction; }
     public final void setCustomOnUp(CustomEventAction eventAction) { this.onUp = eventAction; }
     public final void setCustomOnDown(CustomEventAction eventAction) { this.onDown = eventAction; }
+    public final void setCustomOnEntering(CustomEventAction eventAction) { this.onEntering = eventAction; }
+    public final void setCustomOnExiting(CustomEventAction eventAction) { this.onExiting = eventAction; }
     public final void setCustomOnDefaultEvent(CustomDefaultEventAction eventAction) { this.onDefaultEvent = eventAction; }
     
     @Override
@@ -296,6 +304,20 @@ public class Menu extends MenuOption
             selected++;
             updateFirstOption();
         }
+    }
+    
+    @Override
+    public void onEntering(MenuController controller)
+    {
+        if((onEntering == null || onEntering.execute(controller)) && !keepSelectedIndex)
+            selected = 0;
+    }
+    
+    @Override
+    public void onExiting(MenuController controller)
+    {
+        if((onExiting == null || onExiting.execute(controller)) && !keepSelectedIndex)
+            selected = 0;
     }
     
 }

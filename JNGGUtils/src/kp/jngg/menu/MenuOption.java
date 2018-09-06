@@ -70,4 +70,7 @@ public abstract class MenuOption
     public void onDown(MenuController controller) {}
     public void onLeft(MenuController controller) {}
     public void onRight(MenuController controller) {}
+    
+    public void onEntering(MenuController controller) {}
+    public void onExiting(MenuController controller) {}
 }
