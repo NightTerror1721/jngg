@@ -140,6 +140,9 @@ public abstract class Display implements DrawingArea
     public final Dimension getDimension() { return new Dimension(getWidth(), getHeight()); }
     public final Rectangle getArea() { return new Rectangle(getX(), getY(), getWidth(), getHeight()); }
     
+    public final int getPixelXFromPercentage(double percentage) { return (int) (percentage * getWidth()); }
+    public final int getPixelYFromPercentage(double percentage) { return (int) (percentage * getHeight()); }
+    
     public final void abort(int code)
     {
         abort();

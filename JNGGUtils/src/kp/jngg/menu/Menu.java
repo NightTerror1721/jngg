@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.function.Consumer;
 import kp.jngg.font.Font;
 import kp.jngg.input.InputEvent;
+import kp.jngg.sprite.Sprite;
 
 /**
  *
@@ -31,6 +32,8 @@ public class Menu extends MenuOption
     private CustomEventAction onEntering;
     private CustomEventAction onExiting;
     private CustomDefaultEventAction onDefaultEvent;
+    
+    private Sprite background;
     
     private int selected;
     private int first;
@@ -133,6 +136,9 @@ public class Menu extends MenuOption
     public final void setCustomOnExiting(CustomEventAction eventAction) { this.onExiting = eventAction; }
     public final void setCustomOnDefaultEvent(CustomDefaultEventAction eventAction) { this.onDefaultEvent = eventAction; }
     
+    public final void setBackground(Sprite background) { this.background = background; }
+    public final Sprite getBackground() { return this.background; }
+    
     @Override
     public void update(double delta, MenuController controller)
     {
@@ -145,12 +151,17 @@ public class Menu extends MenuOption
         }
         else max = (int) ((controller.getHeight() - firstPos) / (controller.getNormalSize() + space));
         center = (int) (controller.getPositionX() + controller.getWidth() / 2d);
+        if(background != null)
+            background.update(delta);
         updateFirstOption();
     }
     
     @Override
     public void draw(Graphics2D g, MenuController controller)
     {
+        if(background != null)
+            background.draw(g, controller.getPositionX(), controller.getPositionY(), controller.getWidth(), controller.getHeight());
+        
         Font font = controller.getFont();
         
         if(showTitle)
